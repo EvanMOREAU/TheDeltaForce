@@ -1,0 +1,86 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+  <body class="vertical-layout vertical-compact-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
+
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+
+    <div class="app-content content">
+      <div class="content-wrapper">
+        <div class="content-header row">
+          <div class="content-header-left col-md-8 col-12 mb-2 breadcrumb-new">
+            <h3 class="content-header-title mb-0 d-inline-block">Utilisateurs</h3>
+            <div class="row breadcrumbs-top d-inline-block">
+              <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item active">Utilisateurs
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content-body"><div id="transactions">
+    <div class="transactions-table-th d-none d-md-block">
+        <div class="col-12">
+            <div class="row px-1">
+                <div class="col-md-2 col-12 py-1">
+                    <p class="mb-0"></p>
+                </div>
+                <div class="col-md-2 col-12 py-1">
+                    <p class="mb-0">Pseudo</p>
+                </div>
+                <div class="col-md-2 col-12 py-1">
+                    <p class="mb-0">Discord</p>
+                </div>
+                <div class="col-md-1 col-12 py-1">
+                    <p class="mb-0">Grade</p>
+                </div>
+                <div class="col-md-2 col-12 py-1">
+                    <p class="mb-0">Dernière connexion</p>
+                </div>
+                <div class="col-md-2 col-12 py-1">
+                    <p class="mb-0">Suppression</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="transactions-table-tbody">
+        {% for user in users %}
+            <section class="card pull-up">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-md-2 col-12 py-1">
+                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Date: </span><img src="/uploads/images/{{user.img}}" class="rounded-circle height-50" alt="Card image"/></p>
+                                </div>
+                                <div class="col-md-2 col-12 py-1">
+                                    <span class="d-inline-block d-md-none text-bold-700">Type: </span>{{ user.userName}}
+                                </div>
+                                <div class="col-md-2 col-12 py-1">
+                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Amount: </span>{{ user.discordName}}</p>
+                                </div>
+                                <div class="col-md-1 col-12 py-1">
+                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Currency: </span><a href="#" class="mb-0 btn-sm btn btn-outline-warning round">A venir...</a></p>
+                                </div>
+                                <div class="col-md-2 col-12 py-1">
+                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Date: </span>{{ user.LastConnection|date("d/m/Y H:m:s")}}</p>
+                                </div>
+                                <div class="col-md-2 col-12 py-1">
+                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Tokens: </span><a class="btn-link btn  btn-outline-warning">Supprimer le compte</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
+    </div>
+</div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

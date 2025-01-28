@@ -1,0 +1,91 @@
+{% block body %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termes et Conditions d'Utilisation</title>
+    <link rel="icon" href="assets/img/favicon.ico">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #444;
+        }
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+                .nav-links {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .nav-links a {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #005cbf;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="{{path('app_register')}}">Inscription</a>
+            <a href="{{path('app_login')}}">Connexion</a>
+            <a href="{{path('app_main')}}">Page d'accueil</a>
+        </div>
+        <h1>Termes et Conditions d'Utilisation</h1>
+        <p>Bienvenue sur notre site web. En utilisant ce site, vous acceptez de respecter et d'être lié par les termes et conditions d'utilisation suivants. Veuillez les lire attentivement.</p>
+        
+        <h2>1. Acceptation des Termes</h2>
+        <p>En accédant à ce site, vous reconnaissez avoir lu, compris et accepté d'être lié par ces termes et conditions. Si vous ne les acceptez pas, veuillez ne pas utiliser ce site.</p>
+        
+        <h2>2. Modifications des Termes</h2>
+        <p>Nous nous réservons le droit de modifier ces termes à tout moment. Les modifications prendront effet immédiatement après leur publication sur le site. Il est de votre responsabilité de consulter régulièrement les termes pour être informé des changements.</p>
+        
+        <h2>3. Utilisation du Site</h2>
+        <p>Vous acceptez d'utiliser ce site uniquement à des fins légales et conformément à toutes les lois et réglementations locales, nationales et internationales applicables. Vous vous engagez à ne pas utiliser le site d'une manière qui pourrait endommager, désactiver, surcharger ou altérer le site.</p>
+        
+        <h2>4. Propriété Intellectuelle</h2>
+        <p>Tout le contenu du site, y compris mais sans s'y limiter, les textes, graphiques, logos, images et logiciels, est la propriété d'Evan MOREAU ou de ses concédants de licence et est protégé par les lois sur le droit d'auteur et autres lois sur la propriété intellectuelle.</p>
+        
+        <h2>5. Limitation de Responsabilité</h2>
+        <p>Nous ne serons en aucun cas responsables des dommages directs, indirects, accessoires, spéciaux ou consécutifs résultant de l'utilisation ou de l'incapacité d'utiliser ce site.</p>
+        
+        <h2>6. Liens vers des Sites Tiers</h2>
+        <p>Ce site peut contenir des liens vers des sites tiers. Nous n'avons aucun contrôle sur ces sites et ne sommes pas responsables de leur contenu. L'inclusion de ces liens ne constitue pas une approbation de notre part.</p>
+        
+        <h2>7. Politique de Confidentialité</h2>
+        <p>Votre vie privée est importante pour nous. Veuillez consulter notre <a href="{{path('app_privacy_policy')}}">Politique de Confidentialité</a> pour plus d'informations sur la manière dont nous collectons, utilisons et protégeons vos informations personnelles.</p>
+        
+        <h2>8. Contactez-nous</h2>
+        <p>Si vous avez des questions concernant ces termes et conditions, veuillez nous contacter à <a href="mailto:evan.moreau@etik.com">evan.moreau@etik.com</a>.</p>
+    </div>
+</body>
+</html>
+{% endblock %}

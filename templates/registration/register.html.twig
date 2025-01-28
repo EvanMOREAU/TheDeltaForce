@@ -1,0 +1,52 @@
+{% block title %}Inscription{% endblock %}
+<head>
+<link rel="icon" href="assets/img/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Gaming Login Form Widget Tab Form,Login Forms,Sign up Forms,Registration Forms,News letter Forms,Elements"/>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="assets/login/css/style.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <html>
+
+<body>
+	<div class="padding-all">
+		<div class="header">
+			<h1><img src="assets/img/big-logo.png" alt=" "></h1>
+		</div>
+
+		<div class="design-w3l">
+			<div class="mail-form-agile">
+				<form method="post">
+                    {{ form_start(registrationForm) }}
+                        {{ form_row(registrationForm.email) }}
+                        {{ form_row(registrationForm.plainPassword, {
+                            label: 'Password'
+                        }) }}
+                        <br>
+                        <label class="container-checkbox">
+                            {{ form_widget(registrationForm.agreeTerms) }}
+                            <div class="checkmark"></div>
+                            Accepter les <a href="{{path('app_terms_and_conditions')}}">termes et conditions d'utilisation</a>
+                        </label>
+
+                        <br>
+                        <input type="submit" value="Inscription">
+                    {{ form_end(registrationForm) }}
+				</form>
+			</div>
+		  <div class="clear"> </div>
+		</div>
+		
+		<div class="footer">
+		<p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tous droits réservés | The Delta Force Team</p>
+		</div>
+	</div>
+</body>
+</html>
+{% endblock %}

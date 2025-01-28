@@ -1,0 +1,96 @@
+{% block body %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politique de Confidentialité</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #444;
+        }
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .nav-links a {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: #005cbf;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-links">
+            <a href="{{path('app_register')}}">Inscription</a>
+            <a href="{{path('app_login')}}">Connexion</a>
+            <a href="{{path('app_main')}}">Page d'accueil</a>
+        </div>
+        <h1>Politique de Confidentialité</h1>
+        <p>Nous accordons une grande importance à la confidentialité de vos informations personnelles. Cette politique de confidentialité décrit les types d'informations que nous collectons et la manière dont nous les utilisons et les protégeons.</p>
+        
+        <h2>1. Informations Collectées</h2>
+        <p>Nous pouvons collecter des informations personnelles identifiables telles que votre nom, adresse électronique, numéro de téléphone, et autres informations similaires lorsque vous interagissez avec notre site.</p>
+        
+        <h2>2. Utilisation des Informations</h2>
+        <p>Les informations que nous collectons peuvent être utilisées pour :</p>
+        <ul>
+            <li>Fournir et améliorer nos services</li>
+            <li>Personnaliser votre expérience sur notre site</li>
+            <li>Vous envoyer des mises à jour, des promotions et des communications marketing</li>
+            <li>Répondre à vos questions et demandes de support</li>
+        </ul>
+        
+        <h2>3. Partage des Informations</h2>
+        <p>Nous ne vendons pas, n'échangeons pas et ne louons pas vos informations personnelles à des tiers. Nous pouvons partager vos informations avec des partenaires de confiance qui nous aident à exploiter notre site et à fournir nos services, à condition que ces partenaires s'engagent à garder vos informations confidentielles.</p>
+        
+        <h2>4. Sécurité des Informations</h2>
+        <p>Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos informations personnelles contre l'accès, la modification, la divulgation ou la destruction non autorisés. Cependant, aucune méthode de transmission sur Internet ou de stockage électronique n'est totalement sécurisée.</p>
+        
+        <h2>5. Cookies</h2>
+        <p>Nous n'utilisons aucun cookies pour améliorer votre expérience sur notre site.</p>
+        
+        <h2>6. Vos Droits</h2>
+        <p>Vous avez le droit d'accéder à vos informations personnelles, de les corriger, de les supprimer ou de restreindre leur traitement. Pour exercer ces droits, veuillez nous contacter à l'adresse suivante : <a href="mailto:evan.moreau@etik.com">evan.moreau@etik.com</a>.</p>
+        
+        <h2>7. Modifications de la Politique de Confidentialité</h2>
+        <p>Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. Les modifications prendront effet immédiatement après leur publication sur le site. Nous vous encourageons à consulter régulièrement cette politique pour rester informé des mises à jour.</p>
+        
+        <h2>8. Contactez-nous</h2>
+        <p>Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter à <a href="mailto:evan.moreau@etik.com">evan.moreau@etik.com</a>.</p>
+    </div>
+</body>
+</html>
+
+{% endblock %}

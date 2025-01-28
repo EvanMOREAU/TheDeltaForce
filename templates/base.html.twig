@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="assets/img/favicon.ico">
+        <link href="assets/img/favicon.ico" rel="shortcut icon"/>
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        <!-- Header section -->
+        <header class="header-section">
+            <div class="container">
+                <!-- logo -->
+                <a class="site-logo" href="{{path('app_main')}}">
+                    <img src="assets/img/logo.png" alt="">
+                </a>
+                <div class="user-panel">
+                    {% if not app.user %}<a href="{{ path("app_login")}}">Connexion</a>  |  <a href="{{ path("app_register")}}">Inscription</a>{% else %}<a href="{{path('app_logout')}}">Déconnexion</a>{% endif %}
+                </div>
+                <!-- responsive -->
+                <div class="nav-switch">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <!-- site menu -->
+                <nav class="main-menu">
+                    <ul>
+                        <li><a href="{{ path("app_main")}}">Acceuil</a></li>
+                        <li><a href="review.html">Games</a></li>
+                        <li><a href="categories.html">Blog</a></li>
+                        <li><a href="community.html">Forums</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        {% if is_granted("ROLE_SUPER_ADMIN") %}
+                            <li><a href="{{path("app_administration")}}">Administration</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <!-- Header section end -->
+        {% block body %}{% endblock %}
+        <!-- Footer top section -->
+        <section class="footer-top-section">
+            <div class="container">
+                <div class="footer-top-bg">
+                    <img src="assets/img/footer-top-bg.png" alt="">
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="footer-logo text-white">
+                            <img src="assets/img/footer-logo.png" alt="">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget mb-5 mb-md-0">
+                            <h4 class="fw-title">Latest Posts</h4>
+                            <div class="latest-blog">
+                                <div class="lb-item">
+                                    <div class="lb-thumb set-bg" data-setbg="assets/img/latest-blog/1.jpg"></div>
+                                    <div class="lb-content">
+                                        <div class="lb-date">June 21, 2018</div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum </p>
+                                        <a href="#" class="lb-author">By Admin</a>
+                                    </div>
+                                </div>
+                                <div class="lb-item">
+                                    <div class="lb-thumb set-bg" data-setbg="assets/img/latest-blog/2.jpg"></div>
+                                    <div class="lb-content">
+                                        <div class="lb-date">June 21, 2018</div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum </p>
+                                        <a href="#" class="lb-author">By Admin</a>
+                                    </div>
+                                </div>
+                                <div class="lb-item">
+                                    <div class="lb-thumb set-bg" data-setbg="assets/img/latest-blog/3.jpg"></div>
+                                    <div class="lb-content">
+                                        <div class="lb-date">June 21, 2018</div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum </p>
+                                        <a href="#" class="lb-author">By Admin</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <h4 class="fw-title">Top Comments</h4>
+                            <div class="top-comment">
+                                <div class="tc-item">
+                                    <div class="tc-thumb set-bg" data-setbg="assets/img/authors/1.jpg"></div>
+                                    <div class="tc-content">
+                                        <p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
+                                        <div class="tc-date">June 21, 2018</div>
+                                    </div>
+                                </div>
+                                <div class="tc-item">
+                                    <div class="tc-thumb set-bg" data-setbg="assets/img/authors/2.jpg"></div>
+                                    <div class="tc-content">
+                                        <p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
+                                        <div class="tc-date">June 21, 2018</div>
+                                    </div>
+                                </div>
+                                <div class="tc-item">
+                                    <div class="tc-thumb set-bg" data-setbg="assets/img/authors/3.jpg"></div>
+                                    <div class="tc-content">
+                                        <p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
+                                        <div class="tc-date">June 21, 2018</div>
+                                    </div>
+                                </div>
+                                <div class="tc-item">
+                                    <div class="tc-thumb set-bg" data-setbg="assets/img/authors/4.jpg"></div>
+                                    <div class="tc-content">
+                                        <p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
+                                        <div class="tc-date">June 21, 2018</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer top section end -->
+        	<!-- Footer section -->
+	<footer class="footer-section">
+		<div class="container">
+			<ul class="footer-menu">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="review.html">Games</a></li>
+				<li><a href="categories.html">Blog</a></li>
+				<li><a href="community.html">Forums</a></li>
+				<li><a href="contact.html">Contact</a></li>
+			</ul>
+			<p class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tous droits réservés | The Delta Force Team
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+		</div>
+	</footer>
+	<!-- Footer section end -->
+    </body>
+</html>
