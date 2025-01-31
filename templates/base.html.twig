@@ -31,8 +31,8 @@
                 <nav class="main-menu">
                     <ul>
                         <li><a href="{{ path("app_main")}}">Acceuil</a></li>
-                        <li><a href="review.html">Games</a></li>
-                        <li><a href="categories.html">Blog</a></li>
+                        <li><a href="{{ path("app_games")}}">Nos jeux</a></li>
+                        <li><a href="{{path('app_blog')}}">Articles</a></li>
                         <li><a href="community.html">Forums</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         {% if is_granted("ROLE_SUPER_ADMIN") %}
@@ -54,7 +54,7 @@
                     <div class="col-lg-4">
                         <div class="footer-logo text-white">
                             <img src="assets/img/footer-logo.png" alt="">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
+                            <p><i>"Du ciel à la terre, la victoire ou la mort"</i></p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">

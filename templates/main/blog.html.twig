@@ -1,0 +1,176 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Delta Force{% endblock %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>The Delta Force</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="The Delta Force">
+	<meta name="keywords" content="the, delta, force, deltaforce, team, arma, armareforger, thedelta, thedeltaforce, squad, rp, milsim, military">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->   
+	
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="assets/css/owl.carousel.css"/>
+	<link rel="stylesheet" href="assets/css/style.css"/>
+	<link rel="stylesheet" href="assets/css/animate.css"/>
+
+
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Page info section -->
+	<section class="page-info-section set-bg" data-setbg="/assets/img/slider-1.png">
+		<div class="pi-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-5 col-lg-6 text-white">
+						<h2>Nos articles</h2>
+						<p>Cette liste reste exhaustive. Certains de nos membres jouent évidemment à d'autres jeux.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page info section -->
+	<div class="latest-news-section">
+		<div class="ln-title">Dernières nouvelles</div>
+		<div class="news-ticker">
+			<div class="news-ticker-contant">
+				{% for n in news %}
+					<div class="nt-item"><span style="background-color: {{ n.tag.color }};">{{n.tag.name}}</span>{{ n.description }}</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>  
+
+	<!-- Page section -->
+	<section class="page-section recent-game-page spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="row">
+                        {% for a in articles %}
+                            <div class="col-md-6">
+                                <div class="recent-game-item">
+                                    <div class="rgi-thumb set-bg" data-setbg="/uploads/images/{{ a.img }}">
+                                        {# <div class="cata new">racing</div> #}
+                                    </div>
+                                    <div class="rgi-content">
+                                        <h5><a href="{{ path('app_blog_article', {'id': a.id}) }}">{{ a.title }}</a></h5>
+                                        <p>{{ a.text|slice(0,100)}}</p>
+                                    </div>
+                                </div>	
+                            </div>
+                        {% endfor %}
+					</div>
+					{# <div class="site-pagination">
+						<span class="active">01.</span>
+						<a href="#">02.</a>
+						<a href="#">03.</a>
+					</div> #}
+				</div>
+				<!-- sidebar -->
+				<div class="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0">
+					<!-- widget -->
+					<div class="widget-item">
+						<h4 class="widget-title">Latest Posts</h4>
+						<div class="latest-blog">
+							<div class="lb-item">
+								<div class="lb-thumb set-bg" data-setbg="img/latest-blog/1.jpg"></div>
+								<div class="lb-content">
+									<div class="lb-date">June 21, 2018</div>
+									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+									<a href="#" class="lb-author">By Admin</a>
+								</div>
+							</div>
+							<div class="lb-item">
+								<div class="lb-thumb set-bg" data-setbg="img/latest-blog/2.jpg"></div>
+								<div class="lb-content">
+									<div class="lb-date">June 21, 2018</div>
+									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+									<a href="#" class="lb-author">By Admin</a>
+								</div>
+							</div>
+							<div class="lb-item">
+								<div class="lb-thumb set-bg" data-setbg="img/latest-blog/3.jpg"></div>
+								<div class="lb-content">
+									<div class="lb-date">June 21, 2018</div>
+									<p>Ipsum dolor sit amet, consectetur adipisc ing consecips</p>
+									<a href="#" class="lb-author">By Admin</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- widget -->
+					<div class="widget-item">
+						<h4 class="widget-title">Top Comments</h4>
+						<div class="top-comment">
+							<div class="tc-item">
+								<div class="tc-thumb set-bg" data-setbg="img/authors/1.jpg"></div>
+								<div class="tc-content">
+									<p><a href="#">James Smith</a> <span>on</span> Lorem consec ipsum dolor sit amet, co</p>
+									<div class="tc-date">June 21, 2018</div>
+								</div>
+							</div>
+							<div class="tc-item">
+								<div class="tc-thumb set-bg" data-setbg="img/authors/2.jpg"></div>
+								<div class="tc-content">
+									<p><a href="#">Michael James</a> <span>on</span>Cras sit amet sapien aliquam</p>
+									<div class="tc-date">June 21, 2018</div>
+								</div>
+							</div>
+							<div class="tc-item">
+								<div class="tc-thumb set-bg" data-setbg="img/authors/3.jpg"></div>
+								<div class="tc-content">
+									<p><a href="#">Justin More</a> <span>on</span> Lorem ipsum dolor consecsit amet, co</p>
+									<div class="tc-date">June 21, 2018</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- widget -->
+                    {% if game is defined %}
+                        <div class="widget-item">
+                            <div class="feature-item set-bg" data-setbg="/uploads/images/{{game.img}}">
+                                <div class="fi-content text-white">
+                                    <h5>{{ game.name }}</h5>
+                                    <p>{{ game.description }}</p>
+                                    <div class="fi-comment">Dernier ajouté</div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page section end -->
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="assets/js/jquery-3.2.1.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/owl.carousel.min.js"></script>
+	<script src="assets/js/jquery.marquee.min.js"></script>
+	<script src="assets/js/main.js"></script>
+    </body>
+</html>
+{% endblock %}

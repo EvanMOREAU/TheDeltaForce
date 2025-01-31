@@ -2,21 +2,28 @@
 
 namespace App\Controller;
 
+use App\Entity\News;
 use App\Entity\Tags;
 use App\Entity\User;
+use App\Entity\Event;
 use App\Entity\Games;
 use App\Entity\Grades;
+use App\Form\NewsType;
 use App\Form\TagsType;
 use App\Form\UserType;
+use App\Form\EventType;
 use App\Form\GamesType;
 use App\Entity\Articles;
 use App\Form\GradesType;
 use App\Form\ArticlesType;
+use App\Form\EventEditType;
 use App\Form\GamesEditType;
 use App\Form\ArticlesEditType;
+use App\Repository\NewsRepository;
 use App\Repository\TagsRepository;
 use App\Repository\UserRepository;
 use App\Form\GradesAffectationType;
+use App\Repository\EventRepository;
 use App\Repository\GamesRepository;
 use App\Repository\GradesRepository;
 use App\Services\ImageUploaderHelper;
@@ -176,18 +183,31 @@ final class AdministrationController extends AbstractController
 
         if ($formNew->isSubmitted() && $formNew->isValid()) {
             $imageFile = $formNew->get('img')->getData();
-                if ($imageFile) {
-                    dump($imageFile); // Vérifiez si le fichier est bien reçu
-                    try {
-                        // Appeler la méthode uploadImage pour obtenir le nom du fichier final
-                        $newFilename = $this->imageUploaderHelper->uploadImage($imageFile, $game->getName());
-                        if ($newFilename) {
-                            $game->setImg($newFilename); // Enregistrer seulement le nom du fichier dans l'entité
-                        }
-                    } catch (\Exception $e) {
-                        $this->addFlash('danger', $e->getMessage());
+            if ($imageFile) {
+                dump($imageFile); // Vérifiez si le fichier est bien reçu
+                try {
+                    // Appeler la méthode uploadImage pour obtenir le nom du fichier final
+                    $newFilename = $this->imageUploaderHelper->uploadImage($imageFile, $game->getName());
+                    if ($newFilename) {
+                        $game->setImg($newFilename); // Enregistrer seulement le nom du fichier dans l'entité
                     }
+                } catch (\Exception $e) {
+                    $this->addFlash('danger', $e->getMessage());
                 }
+            }
+            $imageFile2 = $formNew->get('img2')->getData();
+            if ($imageFile2) {
+                dump($imageFile2); // Vérifiez si le fichier est bien reçu
+                try {
+                    // Appeler la méthode uploadImage pour obtenir le nom du fichier final
+                    $newFilename = $this->imageUploaderHelper->uploadImage($imageFile2, $game->getName());
+                    if ($newFilename) {
+                        $game->setImg($newFilename); // Enregistrer seulement le nom du fichier dans l'entité
+                    }
+                } catch (\Exception $e) {
+                    $this->addFlash('danger', $e->getMessage());
+                }
+            }
             $entityManager->persist($game);
             $entityManager->flush();
 
@@ -220,6 +240,32 @@ final class AdministrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $formNew->get('img')->getData();
+            if ($imageFile) {
+                dump($imageFile); // Vérifiez si le fichier est bien reçu
+                try {
+                    // Appeler la méthode uploadImage pour obtenir le nom du fichier final
+                    $newFilename = $this->imageUploaderHelper->uploadImage($imageFile, $game->getName());
+                    if ($newFilename) {
+                        $game->setImg($newFilename); // Enregistrer seulement le nom du fichier dans l'entité
+                    }
+                } catch (\Exception $e) {
+                    $this->addFlash('danger', $e->getMessage());
+                }
+            }
+            $imageFile2 = $formNew->get('img2')->getData();
+            if ($imageFile2) {
+                dump($imageFile2); // Vérifiez si le fichier est bien reçu
+                try {
+                    // Appeler la méthode uploadImage pour obtenir le nom du fichier final
+                    $newFilename = $this->imageUploaderHelper->uploadImage($imageFile2, $game->getName());
+                    if ($newFilename) {
+                        $game->setImg($newFilename); // Enregistrer seulement le nom du fichier dans l'entité
+                    }
+                } catch (\Exception $e) {
+                    $this->addFlash('danger', $e->getMessage());
+                }
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_games_index', [], Response::HTTP_SEE_OTHER);
@@ -333,4 +379,144 @@ final class AdministrationController extends AbstractController
             'form' => $form,
         ]);
     }
+    #[Route('/news', name: 'app_news_index', methods: ['GET', 'POST'])]
+    public function indexNews(Request $request, NewsRepository $newsRepository, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+
+        $new = new News();
+        $formNew = $this->createForm(NewsType::class, $new);
+        $formNew->handleRequest($request);
+
+        if ($formNew->isSubmitted() && $formNew->isValid()) {
+            $entityManager->persist($new);
+            $entityManager->flush();
+
+
+            return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
+        }
+        
+        return $this->render('administration/news.html.twig', [
+            'news' => $newsRepository->findAll(),
+            'formNew' => $formNew,
+        ]);
+    }
+
+    #[Route('/news/{id}/edit', name: 'app_news_edit', methods: ['GET', 'POST'])]
+    public function editNews(Request $request, News $new, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        $form = $this->createForm(NewsType::class, $new);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('administration/edit.html.twig', [
+            'entityInfo' => 'd\'un New',
+            'new' => $new,
+            'form' => $form,
+        ]);
+    }
+    #[Route('/news/{id}/delete', name: 'app_news_delete', methods: ['POST'])]
+    public function deleteNews(Request $request, News $new, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        if ($this->isCsrfTokenValid('delete'.$new->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($new);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/events', name: 'app_events_index', methods: ['GET', 'POST'])]
+    public function indexEvent(Request $request, EventRepository $eventsRepository, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+
+        $event = new Event();
+        $formNew = $this->createForm(EventType::class, $event);
+        $formNew->handleRequest($request);
+
+        if ($formNew->isSubmitted() && $formNew->isValid()) {
+            $imageFile = $formNew->get('img')->getData();
+            if ($imageFile) {
+                dump($imageFile); // Vérifiez si le fichier est bien reçu
+                try {
+                    // Appeler la méthode uploadImage pour obtenir le nom du fichier final
+                    $newFilename = $this->imageUploaderHelper->uploadImage($imageFile, $event->getTitle());
+                    if ($newFilename) {
+                        $event->setImg($newFilename); // Enregistrer seulement le nom du fichier dans l'entité
+                    }
+                } catch (\Exception $e) {
+                    $this->addFlash('danger', $e->getMessage());
+                }
+            }
+            $user = $this->security->getUser();
+            $event->setAuthor($user);
+            $entityManager->persist($event);
+            $entityManager->flush();
+
+
+            return $this->redirectToRoute('app_events_index', [], Response::HTTP_SEE_OTHER);
+        }
+        
+        return $this->render('administration/event.html.twig', [
+            'events' => $eventsRepository->findAll(),
+            'formNew' => $formNew,
+        ]);
+    }
+
+    #[Route('/events/{id}/edit', name: 'app_events_edit', methods: ['GET', 'POST'])]
+    public function editEvent(Request $request, Event $event, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        $form = $this->createForm(EventEditType::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('img')->getData();
+            if ($imageFile) {
+                dump($imageFile); // Vérifiez si le fichier est bien reçu
+                try {
+                    // Appeler la méthode uploadImage pour obtenir le nom du fichier final
+                    $newFilename = $this->imageUploaderHelper->uploadImage($imageFile, $event->getTitle());
+                    if ($newFilename) {
+                        $event->setImg($newFilename); // Enregistrer seulement le nom du fichier dans l'entité
+                    }
+                } catch (\Exception $e) {
+                    $this->addFlash('danger', $e->getMessage());
+                }
+            }
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_events_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('administration/edit.html.twig', [
+            'entityInfo' => 'd\'un Event',
+            'event' => $event,
+            'form' => $form,
+        ]);
+    }
+    // #[Route('/events/{id}/delete', name: 'app_events_delete', methods: ['POST'])]
+    // public function deleteEvent(Request $request, Event $event, EntityManagerInterface $entityManager): Response
+    // {
+    //     $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+    //     $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+    //     if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->getPayload()->getString('_token'))) {
+    //         $entityManager->remove($event);
+    //         $entityManager->flush();
+    //     }
+
+    //     return $this->redirectToRoute('app_events_index', [], Response::HTTP_SEE_OTHER);
+    // }
 }

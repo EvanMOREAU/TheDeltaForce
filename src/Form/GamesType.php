@@ -37,7 +37,28 @@ class GamesType extends AbstractType
                 'required' => true,
                 'data_class' => null, 
                 'mapped' => false,
-                'label' => 'Image (500x723)',
+                'label' => 'Image verticale (500x723)',
+                'attr' => [
+                    'class' => 'form-control',
+                    'type' => 'file',
+                ],
+                'constraints' => [
+                    new File([
+                        'maxSize' => '20M',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Envoyez une image correcte s\'il vous plaît.',
+                    ])
+                ],
+            ])
+            ->add('img2', FileType::class, [
+                'required' => true,
+                'data_class' => null, 
+                'mapped' => false,
+                'label' => 'Image horizontale(500x723)',
                 'attr' => [
                     'class' => 'form-control',
                     'type' => 'file',

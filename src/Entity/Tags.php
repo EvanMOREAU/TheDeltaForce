@@ -33,10 +33,17 @@ class Tags
     #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'tag')]
     private Collection $articles;
 
+    /**
+     * @var Collection<int, News>
+     */
+    #[ORM\OneToMany(targetEntity: News::class, mappedBy: 'tag')]
+    private Collection $news;
+
     public function __construct()
     {
         $this->games = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->news = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,6 +124,36 @@ class Tags
     {
         if ($this->articles->removeElement($article)) {
             $article->removeTag($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, News>
+     */
+    public function getNews(): Collection
+    {
+        return $this->news;
+    }
+
+    public function addNews(News $news): static
+    {
+        if (!$this->news->contains($news)) {
+            $this->news->add($news);
+            $news->setTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNews(News $news): static
+    {
+        if ($this->news->removeElement($news)) {
+            // set the owning side to null (unless already changed)
+            if ($news->getTag() === $this) {
+                $news->setTag(null);
+            }
         }
 
         return $this;

@@ -15,7 +15,27 @@ class GamesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Games::class);
     }
-
+    /**
+     * Récupère les 4 éléments avec le plus grand id
+     *
+     * @return Games[]
+     */
+    public function findTopFourById(): array
+    {
+        return $this->createQueryBuilder('g')
+            ->orderBy('g.id', 'DESC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+    }
+    public function findLastById(): array
+    {
+        return $this->createQueryBuilder('g')
+            ->orderBy('g.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+    }
     //    /**
     //     * @return Games[] Returns an array of Games objects
     //     */

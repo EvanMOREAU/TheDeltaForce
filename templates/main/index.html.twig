@@ -68,9 +68,9 @@
 		<div class="ln-title">Dernières nouvelles</div>
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
-				<div class="nt-item"><span class="new">new</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
-				<div class="nt-item"><span class="strategy">strategy</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
-				<div class="nt-item"><span class="racing">racing</span>Isum dolor sit amet, consectetur adipiscing elit. </div>
+				{% for n in news %}
+					<div class="nt-item"><span style="background-color: {{ n.tag.color }};">{{n.tag.name}}</span>{{ n.description }}</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
@@ -137,44 +137,27 @@
 	<!-- Tournaments section -->
 	<section class="tournaments-section spad">
 		<div class="container">
-			<div class="tournament-title">Tournaments</div>
+			<div class="tournament-title">A venir...</div>
 			<div class="row">
-				<div class="col-md-6">
-					<div class="tournament-item mb-4 mb-lg-0">
-						<div class="ti-notic">Premium Tournament</div>
-						<div class="ti-content">
-							<div class="ti-thumb set-bg" data-setbg="assets/img/tournament/1.jpg"></div>
-							<div class="ti-text">
-								<h4>World Of WarCraft</h4>
-								<ul>
-									<li><span>Tournament Beggins:</span> June 20, 2018</li>
-									<li><span>Tounament Ends:</span> July 01, 2018</li>
-									<li><span>Participants:</span> 10 teams</li>
-									<li><span>Tournament Author:</span> Admin</li>
-								</ul>
-								<p><span>Prizes:</span> 1st place $2000, 2nd place: $1000, 3rd place: $500</p>
+				{% for ue in upcomingEvents|slice(0,2)  %}
+					<div class="col-md-6">
+						<div class="tournament-item mb-4 mb-lg-0">
+							{% if ue.inGame%}<div class="ti-notic">En jeu</div>{% endif %}
+							<div class="ti-content">
+								<div class="ti-thumb set-bg" data-setbg="assets/img/tournament/1.jpg"></div>
+								<div class="ti-text">
+									<h4>{{ ue.title }}</h4>
+									<ul>
+										<li><span>Début:</span> {{ ue.dateDebut|date("d/m/y H:m")}}</li>
+										<li><span>Fin:</span> {{ ue.dateFin|date("d/m/y H:m")}}</li>
+										<li><span>Auteur:</span> {{ ue.author.userName }}</li>
+									</ul>
+									<p><span>Concept:</span> {{ ue.title }}</p>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="tournament-item">
-						<div class="ti-notic">Premium Tournament</div>
-						<div class="ti-content">
-							<div class="ti-thumb set-bg" data-setbg="assets/img/tournament/2.jpg"></div>
-							<div class="ti-text">
-								<h4>DOOM</h4>
-								<ul>
-									<li><span>Tournament Beggins:</span> June 20, 2018</li>
-									<li><span>Tounament Ends:</span> July 01, 2018</li>
-									<li><span>Participants:</span> 10 teams</li>
-									<li><span>Tournament Author:</span> Admin</li>
-								</ul>
-								<p><span>Prizes:</span> 1st place $2000, 2nd place: $1000, 3rd place: $500</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</section>
@@ -185,54 +168,22 @@
 	<section class="review-section spad set-bg" data-setbg="assets/img/review-bg.png">
 		<div class="container">
 			<div class="section-title">
-				<div class="cata new">new</div>
-				<h2>Recent Reviews</h2>
+				<h2>Anciens évènements</h2>
 			</div>
 			<div class="row">
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="assets/img/review/1.jpg">
-							<div class="score yellow">9.3</div>
-						</div>
-						<div class="review-text">
-							<h5>Assasin’’s Creed</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="assets/img/review/2.jpg">
-							<div class="score purple">9.5</div>
-						</div>
-						<div class="review-text">
-							<h5>Doom</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
+				{% for pe in pastEvents|slice(0,4) %}
+					<div class="col-lg-3 col-md-6">
+						<div class="review-item">
+							<div class="review-cover set-bg" data-setbg="/uploads/images/{{pe.img}}">
+								{# <div class="score yellow">9.3</div> #}
+							</div>
+							<div class="review-text">
+								<h5>{{ pe.title }}</h5>
+								<p>Terminé le {{ pe.dateFin|date("d/m/y")}}</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="assets/img/review/3.jpg">
-							<div class="score green">9.1</div>
-						</div>
-						<div class="review-text">
-							<h5>Overwatch</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="assets/img/review/4.jpg">
-							<div class="score pink">9.7</div>
-						</div>
-						<div class="review-text">
-							<h5>GTA</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</section>

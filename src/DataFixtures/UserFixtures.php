@@ -31,6 +31,7 @@ class UserFixtures extends Fixture
         $superAdmin->setUserName('Lloyd Le Vrai');
         $superAdmin->setDiscordName("evanmoreau");
         $manager->persist($superAdmin);
+
         $manager->flush();
     }
 }

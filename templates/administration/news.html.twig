@@ -1,0 +1,98 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+  <body class="vertical-layout vertical-compact-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
+
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
+
+    <div class="app-content content">
+      <div class="content-wrapper">
+        <div class="content-header row">
+          <div class="content-header-left col-md-8 col-12 mb-2 breadcrumb-new">
+            <h3 class="content-header-title mb-0 d-inline-block"><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newCreator"><i class="fa-solid fa-plus"></i></button> Nouvelles</h3>
+            <div class="row breadcrumbs-top d-inline-block">
+              <div class="breadcrumb-wrapper col-12">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item active">Nouvelles
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content-body"><div id="transactions">
+    <div class="transactions-table-th d-none d-md-block">
+        <div class="col-12">
+            <div class="row px-1">
+                <div class="col-md-2 col-12 py-1">
+                    <p class="mb-0">Contenu</p>
+                </div>
+                <div class="col-md-2 col-12 py-1">
+                    <p class="mb-0">Tag</p>
+                </div>
+                <div class="col-md-1 col-12 py-1">
+                    <p class="mb-0">Modifier</p>
+                </div>
+                {# <div class="col-md-2 col-12 py-1">
+                    <p class="mb-0">Supprimer</p>
+                </div> #}
+            </div>
+        </div>
+    </div>
+    <div class="transactions-table-tbody">
+        {% for new in news %}
+            <section class="card pull-up">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-md-2 col-12 py-1">
+                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ new.description}}
+                                </div>
+                                <div class="col-md-2 col-12 py-1">
+                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ new.tag.name}}
+                                </div>
+                                <div class="col-md-2 col-12 py-1">
+                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Tokens: </span><a href="{{ path('app_news_edit', {'id': new.id}) }}"class=" link btn-link btn  btn-outline-warning">Modifier</a></p>
+                                </div>
+                                <div class="col-md-2 col-12 py-1">
+                                    <form method="post" action="{{ path('app_news_delete', {'id': new.id}) }}" onsubmit="return confirm('Êtes vous certain de vouloir supprimer la news "{{new.description}}"?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ new.id) }}">
+                                        <button class="btn">Supprimer</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="newCreator" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="newCreatorLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="newCreatorLabel">Créer un new</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        {{ form_start(formNew) }}
+
+            <div class="modal-body">
+                {{ form_widget(formNew)}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="submit" class="btn btn-primary">Créer</button>
+            </div>
+        {{ form_end(formNew) }}
+    </div>
+  </div>
+</div>
+{% endblock %}

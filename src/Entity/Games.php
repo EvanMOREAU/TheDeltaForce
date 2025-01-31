@@ -30,9 +30,19 @@ class Games
     #[ORM\ManyToMany(targetEntity: Tags::class, inversedBy: 'games')]
     private Collection $tag;
 
+    /**
+     * @var Collection<int, Event>
+     */
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'game')]
+    private Collection $events;
+
+    #[ORM\Column(length: 255)]
+    private ?string $img2 = null;
+
     public function __construct()
     {
         $this->tag = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,6 +106,48 @@ class Games
     public function removeTag(Tags $tag): static
     {
         $this->tag->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): static
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): static
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getGame() === $this) {
+                $event->setGame(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getImg2(): ?string
+    {
+        return $this->img2;
+    }
+
+    public function setImg2(string $img2): static
+    {
+        $this->img2 = $img2;
 
         return $this;
     }
