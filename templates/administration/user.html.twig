@@ -41,9 +41,9 @@
                 <div class="col-md-2 col-12 py-1">
                     <p class="mb-0">Dernière connexion</p>
                 </div>
-                <div class="col-md-2 col-12 py-1">
+                {# <div class="col-md-2 col-12 py-1">
                     <p class="mb-0">Suppression</p>
-                </div>
+                </div> #}
             </div>
         </div>
     </div>
@@ -64,14 +64,19 @@
                                     <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Amount: </span>{{ user.discordName}}</p>
                                 </div>
                                 <div class="col-md-1 col-12 py-1">
-                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Currency: </span><a href="#" class="mb-0 btn-sm btn btn-outline-warning round">A venir...</a></p>
+                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Currency: </span><a href="{{ path('app_grades_affectation', {'id': user.id}) }}" class="mb-0 btn-sm btn btn-outline-warning round">{%if user.grade.name is defined %}{{ user.grade.name }}{% else %}Non-Défini{% endif %}</a></p>
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
                                     <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Date: </span>{{ user.LastConnection|date("d/m/Y H:m:s")}}</p>
                                 </div>
+                                {% if app.user.id != user.id %}
                                 <div class="col-md-2 col-12 py-1">
-                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Tokens: </span><a class="btn-link btn  btn-outline-warning">Supprimer le compte</a></p>
+                                    <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes vous certain de vouloir supprimer l'utilisateur"{{user.userName}}"?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                        <button class="btn">Supprimer le compte</button>
+                                    </form>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

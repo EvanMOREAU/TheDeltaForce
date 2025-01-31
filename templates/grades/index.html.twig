@@ -1,28 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tags index{% endblock %}
+{% block title %}Grades index{% endblock %}
 
 {% block body %}
-    <h1>Tags index</h1>
+    <h1>Grades index</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Color</th>
+                <th>LevelRank</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for tag in tags %}
+        {% for grade in grades %}
             <tr>
-                <td>{{ tag.id }}</td>
-                <td>{{ tag.name }}</td>
-                <td>{{ tag.color }}</td>
+                <td>{{ grade.id }}</td>
+                <td>{{ grade.name }}</td>
+                <td>{{ grade.levelRank }}</td>
                 <td>
-                    <a href="{{ path('app_temps_tags_show', {'id': tag.id}) }}">show</a>
-                    <a href="{{ path('app_temps_tags_edit', {'id': tag.id}) }}">edit</a>
+                    <a href="{{ path('app_grades_show', {'id': grade.id}) }}">show</a>
+                    <a href="{{ path('app_grades_edit', {'id': grade.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_temps_tags_new') }}">Create new</a>
+    <a href="{{ path('app_grades_new') }}">Create new</a>
 {% endblock %}

@@ -36,7 +36,7 @@
                         <li><a href="community.html">Forums</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         {% if is_granted("ROLE_SUPER_ADMIN") %}
-                            <li><a href="{{path("app_administration")}}">Administration</a></li>
+                            <li><a href="{{path("app_administration_users")}}">Administration</a></li>
                         {% endif %}
                     </ul>
                 </nav>

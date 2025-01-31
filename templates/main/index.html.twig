@@ -81,46 +81,22 @@
 	<section class="feature-section spad">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="assets/img/features/1.jpg">
-						<span class="cata new">new</span>
-						<div class="fi-content text-white">
-							<h5><a href="#">Suspendisse ut justo tem por, rutrum</a></h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-							<a href="#" class="fi-comment">3 Comments</a>
+				{% for game in games|slice(0,4) %}
+					<div class="col-lg-3 col-md-6 p-0">
+						<div class="feature-item set-bg" data-setbg="/uploads/images/{{game.img}}">
+							{% for tag in game.tag|slice(0,1) %}
+								{% if tag is defined %}
+									<span class="cata" style="background-color: {{ tag.color }};">{{ tag.name }}</span>
+								{% endif %}
+							{% endfor %}
+							<div class="fi-content text-white">
+								<h5><a href="#">{{game.name}}</a></h5>
+								<p>{{game.description}}</p>
+								{# <a href="#" class="fi-comment">3 Comments</a> #}
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="assets/img/features/2.jpg">
-						<span class="cata strategy">strategy</span>
-						<div class="fi-content text-white">
-							<h5><a href="#">Justo tempor, rutrum erat id, molestie</a></h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-							<a href="#" class="fi-comment">3 Comments</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="assets/img/features/3.jpg">
-						<span class="cata new">new</span>
-						<div class="fi-content text-white">
-							<h5><a href="#">Nullam lacinia ex eleifend orci porttitor</a></h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-							<a href="#" class="fi-comment">3 Comments</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 p-0">
-					<div class="feature-item set-bg" data-setbg="assets/img/features/4.jpg">
-						<span class="cata racing">racing</span>
-						<div class="fi-content text-white">
-							<h5><a href="#">Lacinia ex eleifend orci suscipit</a></h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-							<a href="#" class="fi-comment">3 Comments</a>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</section>
@@ -131,58 +107,27 @@
 	<section class="recent-game-section spad set-bg" data-setbg="assets/img/recent-game-bg.png">
 		<div class="container">
 			<div class="section-title">
-				<div class="cata new">new</div>
-				<h2>Recent Games</h2>
+				<h2>Articles</h2>
 			</div>
 			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="assets/img/recent-game/1.jpg">
-							<div class="cata new">new</div>
-						</div>
-						<div class="rgi-content">
-							<h5>Suspendisse ut justo tem por, rutrum</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit. </p>
-							<a href="#" class="comment">3 Comments</a>
-							<div class="rgi-extra">
-								<div class="rgi-star"><img src="assets/img/icons/star.png" alt=""></div>
-								<div class="rgi-heart"><img src="assets/img/icons/heart.png" alt=""></div>
+				{% for a in articles|slice(0,3) %}
+					<div class="col-lg-4 col-md-6">
+						<div class="recent-game-item">
+							<div class="rgi-thumb set-bg" data-setbg="/uploads/images/{{a.img}}">
+								{% for tag in a.tag|slice(0,1) %}{% if tag is defined %}<span class="cata new">{{tag.name}}</span>{% endif %}{% endfor %}
 							</div>
-						</div>
-					</div>	
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="assets/img/recent-game/2.jpg">
-							<div class="cata racing">racing</div>
-						</div>
-						<div class="rgi-content">
-							<h5>Susce pulvinar metus nulla, vel  facilisis sem </h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit. </p>
-							<a href="#" class="comment">3 Comments</a>
-							<div class="rgi-extra">
-								<div class="rgi-star"><img src="assets/img/icons/star.png" alt=""></div>
-								<div class="rgi-heart"><img src="assets/img/icons/heart.png" alt=""></div>
+							<div class="rgi-content">
+								<h5>{{ a.title }}</h5>
+								<p>{{a.text|slice(0,80)}}... </p>
+								<a href="#" class="comment">3 Comments</a>
+								<div class="rgi-extra">
+									<div class="rgi-star"><img src="assets/img/icons/star.png" alt=""></div>
+									<div class="rgi-heart"><img src="assets/img/icons/heart.png" alt=""></div>
+								</div>
 							</div>
-						</div>
-					</div>	
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="assets/img/recent-game/3.jpg">
-							<div class="cata adventure">Adventure</div>
-						</div>
-						<div class="rgi-content">
-							<h5>Suspendisse ut justo tem por, rutrum</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit. </p>
-							<a href="#" class="comment">3 Comments</a>
-							<div class="rgi-extra">
-								<div class="rgi-star"><img src="assets/img/icons/star.png" alt=""></div>
-								<div class="rgi-heart"><img src="assets/img/icons/heart.png" alt=""></div>
-							</div>
-						</div>
-					</div>	
-				</div>
+						</div>	
+					</div>
+				{% endfor %}
 			</div>
 		</div>
 	</section>

@@ -71,7 +71,7 @@
         <div class="main-menu menu-fixed menu-dark menu-bg-default rounded menu-accordion menu-shadow">
             <div class="main-menu-content"><a class="navigation-brand d-none d-md-block d-lg-block d-xl-block" href="{{path('app_main')}}"><img class="brand-logo" alt="CryptoDash admin logo" src="/assets/img/logo-only.png"/></a>
                 <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="active"><a href="{{path('app_administration')}}"><i class="icon-grid"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+                <li class="active"><a href="{{path('app_administration_users')}}"><i class="icon-grid"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
                 </li>
                 <li class=" nav-item"><a href="#"><i class="icon-user-following"></i><span class="menu-title" data-i18n="">Utilisateurs</span></a>
                     <ul class="menu-content">
@@ -80,43 +80,22 @@
                     <li class="navigation-divider"></li>
                     <li><a class="menu-item" href="#">Subsituts de l'utilisateur</a>
                         <ul class="menu-content">
-                        <li><a class="menu-item" href="account-login.html">Grades</a>
+                        <li><a class="menu-item" href="{{path('app_grades_index')}}">Grades</a>
                         </li>
                         </ul>
                     </li>
                     </ul>
                 </li>
-                <li class=" nav-item"><a href="#"><i class="icon-user-following"></i><span class="menu-title" data-i18n="">Autres éléments du site</span></a>
+                <li class=" nav-item"><a href="#"><i class="fa-solid fa-folder-plus"></i><span class="menu-title" data-i18n="">Autres éléments du site</span></a>
                     <ul class="menu-content">
                     <li><a class="menu-item" href="{{path('app_tags_index')}}">Tags du site</a>
                     </li>
                     <li class="navigation-divider"></li>
                     <li><a class="menu-item" href="#">Articles & Jeux</a>
                         <ul class="menu-content">
-                        <li><a class="menu-item" href="account-login.html">Articles</a>
+                        <li><a class="menu-item" href="{{path('app_articles_index')}}">Articles</a>
                         </li>
-                        <li><a class="menu-item" href="account-register.html">Jeux</a>
-                        </li>
-                        </ul>
-                    </li>
-                    </ul>
-                </li>
-                <li class=" nav-item"><a href="transactions.html"><i class="icon-shuffle"></i><span class="menu-title" data-i18n="">Transactions</span></a>
-                </li>
-                <li class=" nav-item"><a href="faq.html"><i class="icon-support"></i><span class="menu-title" data-i18n="">FAQ</span></a>
-                </li>
-                <li class=" nav-item"><a href="#"><i class="icon-user-following"></i><span class="menu-title" data-i18n="">Account</span></a>
-                    <ul class="menu-content">
-                    <li><a class="menu-item" href="account-profile.html">Profile</a>
-                    </li>
-                    <li><a class="menu-item" href="account-login-history.html">Login History</a>
-                    </li>
-                    <li class="navigation-divider"></li>
-                    <li><a class="menu-item" href="#">Misc</a>
-                        <ul class="menu-content">
-                        <li><a class="menu-item" href="account-login.html">Login</a>
-                        </li>
-                        <li><a class="menu-item" href="account-register.html">Register</a>
+                        <li><a class="menu-item" href="{{path('app_games_index')}}">Jeux</a>
                         </li>
                         </ul>
                     </li>
@@ -131,9 +110,9 @@
 
 
     <footer class="footer footer-static footer-transparent">
-      <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">Copyright  &copy; <script>
-          document.write(new Date().getFullYear())
-          </script> <a class="text-bold-800 grey darken-2" href="https://themeselection.com/" target="_blank">ThemeSelection </a>, All rights reserved. </span><span class="float-md-right d-block d-md-inline-blockd-none d-lg-block">Hand-crafted & Made with <i class="ft-heart pink"></i></span></p>
+      <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tous droits réservés | The Delta Force Team 
+       </span></p>
     </footer>
 
     <script src="https://kit.fontawesome.com/43b50773be.js" crossorigin="anonymous"></script>
@@ -152,5 +131,6 @@
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="/assets/dashboard/app-assets/js/scripts/pages/dashboard-ico.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
+
     </body>
 </html>

@@ -9,13 +9,13 @@
       <div class="content-wrapper">
         <div class="content-header row">
           <div class="content-header-left col-md-8 col-12 mb-2 breadcrumb-new">
-            <h3 class="content-header-title mb-0 d-inline-block"><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#tagCreator"><i class="fa-solid fa-plus"></i></button> Tags</h3>
+            <h3 class="content-header-title mb-0 d-inline-block"><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#gradeCreator"><i class="fa-solid fa-plus"></i></button> Grades</h3>
             <div class="row breadcrumbs-top d-inline-block">
               <div class="breadcrumb-wrapper col-12">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
                   </li>
-                  <li class="breadcrumb-item active">Tags
+                  <li class="breadcrumb-item active">Grades
                   </li>
                 </ol>
               </div>
@@ -29,9 +29,6 @@
                 <div class="col-md-2 col-12 py-1">
                     <p class="mb-0">Nom</p>
                 </div>
-                <div class="col-md-2 col-12 py-1">
-                    <p class="mb-0">Couleur</p>
-                </div>
                 <div class="col-md-1 col-12 py-1">
                     <p class="mb-0">Modifier</p>
                 </div>
@@ -42,27 +39,24 @@
         </div>
     </div>
     <div class="transactions-table-tbody">
-        {% for tag in tags %}
+        {% for grade in grades %}
             <section class="card pull-up">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-md-2 col-12 py-1">
-                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ tag.name}}
+                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ grade.name}}
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Color: </span><div style="width: 20px; height: 20px; background-color: {{ tag.color }}; border: 1px solid #000; border-radius: 3px;"></div></p>
+                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Tokens: </span><a href="{{ path('app_grades_edit', {'id': grade.id}) }}"class=" link btn-link btn  btn-outline-warning">Modifier</a></p>
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Tokens: </span><a href="{{ path('app_tags_edit', {'id': tag.id}) }}"class=" link btn-link btn  btn-outline-warning">Modifier</a></p>
-                                </div>
-                                {# <div class="col-md-2 col-12 py-1">
-                                    <form method="post" action="{{ path('app_tags_delete', {'id': tag.id}) }}" onsubmit="return confirm('Êtes vous certain de vouloir supprimer le tag "{{tag.name}}"?');">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tag.id) }}">
-                                        <button class="btn">Supprimer le compte</button>
+                                    <form method="post" action="{{ path('app_grades_delete', {'id': grade.id}) }}" onsubmit="return confirm('Êtes vous certain de vouloir supprimer le grade "{{grade.name}}"?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ grade.id) }}">
+                                        <button class="btn">Supprimer</button>
                                     </form>
-                                </div> #}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -75,11 +69,11 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="tagCreator" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tagCreatorLabel" aria-hidden="true">
+<div class="modal fade" id="gradeCreator" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="gradeCreatorLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h1 class="modal-title fs-5" id="tagCreatorLabel">Créer un nouveau tag</h1>
+            <h1 class="modal-title fs-5" id="gradeCreatorLabel">Ajouter un jeu</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         {{ form_start(formNew) }}
