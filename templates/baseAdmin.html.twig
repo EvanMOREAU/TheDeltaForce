@@ -34,6 +34,11 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+        <style>
+            a {
+                text-decoration: none;
+            }
+        </style>
         {% block stylesheets %}
         {% endblock %}
 
@@ -48,7 +53,7 @@
                 <div class="navbar-header d-md-none">
                 <ul class="nav navbar-nav flex-row">
                     <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
-                    <li class="nav-item d-md-none"><a class="navbar-brand" href="index.html"><img class="brand-logo d-none d-md-block" alt="CryptoDash admin logo" src="/assets/img/logo-only.png"><img class="brand-logo d-sm-block d-md-none" alt="CryptoDash admin logo sm" src="/assets/dashboard/app-assets/images/logo/logo-sm.png"></a></li>
+                    <li class="nav-item d-md-none"><a class="navbar-brand" href="index.html"><img class="brand-logo d-none d-md-block" alt="CryptoDash admin logo" src="/assets/img/logo-only.png"><img class="brand-logo d-sm-block d-md-none" alt="CryptoDash admin logo sm" src="/assets/img/logo-only.png"></a></li>
                     <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="la la-ellipsis-v">   </i></a></li>
                 </ul>
                 </div>
@@ -94,6 +99,8 @@
                     <li><a class="menu-item" href="#">Contenu du site</a>
                         <ul class="menu-content">
                         <li><a class="menu-item" href="{{path('app_articles_index')}}">Articles</a>
+                        </li>
+                        <li><a class="menu-item" href="{{path('app_comment_index')}}">Commentaires</a>
                         </li>
                         <li><a class="menu-item" href="{{path('app_games_index')}}">Jeux</a>
                         </li>

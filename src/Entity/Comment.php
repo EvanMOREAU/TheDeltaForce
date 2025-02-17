@@ -20,8 +20,11 @@ class Comment
     #[ORM\Column(type: Types::TEXT)]
     private ?string $text = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $date = null;
+
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    private ?Articles $article = null;
 
     public function getId(): ?int
     {
@@ -60,6 +63,18 @@ class Comment
     public function setDate(\DateTimeImmutable $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Articles
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Articles $article): static
+    {
+        $this->article = $article;
 
         return $this;
     }

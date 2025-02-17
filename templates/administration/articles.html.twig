@@ -49,13 +49,13 @@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-md-2 col-12 py-1">
-                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ article.title}}
+                                    <span class="d-inline-block d-md-none text-bold-700">Titre: </span>{{ article.title}}
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ article.text}}
+                                    <span class="d-inline-block d-md-none text-bold-700">Contenu: </span>{{ article.text}}
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Tokens: </span><a href="{{ path('app_articles_edit', {'id': article.id}) }}"class=" link btn-link btn  btn-outline-warning">Modifier</a></p>
+                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Modifier: </span><a href="{{ path('app_articles_edit', {'id': article.id}) }}"class=" link btn-link btn  btn-outline-warning">Modifier</a></p>
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
                                     <form method="post" action="{{ path('app_articles_delete', {'id': article.id}) }}" onsubmit="return confirm('Êtes vous certain de vouloir supprimer le article "{{article.title}}"?');">

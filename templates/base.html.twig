@@ -7,7 +7,15 @@
         <link href="assets/img/favicon.ico" rel="shortcut icon"/>
         {% block stylesheets %}
         {% endblock %}
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
 
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="/assets/css/owl.carousel.css"/>
+	<link rel="stylesheet" href="/assets/css/style.css"/>
+	<link rel="stylesheet" href="/assets/css/animate.css"/>
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
@@ -33,11 +41,10 @@
                         <li><a href="{{ path("app_main")}}">Acceuil</a></li>
                         <li><a href="{{ path("app_games")}}">Nos jeux</a></li>
                         <li><a href="{{path('app_blog')}}">Articles</a></li>
-                        <li><a href="community.html">Forums</a></li>
-                        <li><a href="contact.html">Contact</a></li>
                         {% if is_granted("ROLE_SUPER_ADMIN") %}
                             <li><a href="{{path("app_administration_users")}}">Administration</a></li>
                         {% endif %}
+                        {% if app.user %} <li><a href="{{path('app_main_account')}}">Mon compte</a></li> {% endif %}
                     </ul>
                 </nav>
             </div>
@@ -48,78 +55,45 @@
         <section class="footer-top-section">
             <div class="container">
                 <div class="footer-top-bg">
-                    <img src="assets/img/footer-top-bg.png" alt="">
+                    <img src="/assets/img/footer-top-bg.png" alt="">
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="footer-logo text-white">
-                            <img src="assets/img/footer-logo.png" alt="">
+                            <img src="/assets/img/footer-logo.png" alt="">
                             <p><i>"Du ciel à la terre, la victoire ou la mort"</i></p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-widget mb-5 mb-md-0">
-                            <h4 class="fw-title">Latest Posts</h4>
+                            <h4 class="fw-title">Deniers articles</h4>
                             <div class="latest-blog">
-                                <div class="lb-item">
-                                    <div class="lb-thumb set-bg" data-setbg="assets/img/latest-blog/1.jpg"></div>
-                                    <div class="lb-content">
-                                        <div class="lb-date">June 21, 2018</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum </p>
-                                        <a href="#" class="lb-author">By Admin</a>
+                                {% for a in lastArticles %}
+                                    <div class="lb-item">
+                                        <img class="lb-thumb set-bg" src="/uploads/images/{{a.img}}">
+                                        <div class="lb-content">
+                                            <div class="lb-date">{{ a.title }}</div>
+                                            <p>The Delta Force</p>
+                                            <a href="{{ path('app_blog_article', {'id': a.id})}}" class="lb-author">Voir</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="lb-item">
-                                    <div class="lb-thumb set-bg" data-setbg="assets/img/latest-blog/2.jpg"></div>
-                                    <div class="lb-content">
-                                        <div class="lb-date">June 21, 2018</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum </p>
-                                        <a href="#" class="lb-author">By Admin</a>
-                                    </div>
-                                </div>
-                                <div class="lb-item">
-                                    <div class="lb-thumb set-bg" data-setbg="assets/img/latest-blog/3.jpg"></div>
-                                    <div class="lb-content">
-                                        <div class="lb-date">June 21, 2018</div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum </p>
-                                        <a href="#" class="lb-author">By Admin</a>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-widget">
-                            <h4 class="fw-title">Top Comments</h4>
+                            <h4 class="fw-title">Derniers commentaires</h4>
                             <div class="top-comment">
-                                <div class="tc-item">
-                                    <div class="tc-thumb set-bg" data-setbg="assets/img/authors/1.jpg"></div>
-                                    <div class="tc-content">
-                                        <p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
-                                        <div class="tc-date">June 21, 2018</div>
+                                {% for lc in lastComments|slice(0,4) %}
+                                    <div class="tc-item">
+                                        <img class="tc-thumb set-bg" src="/uploads/images/{{lc.author.img}}">
+                                        <div class="tc-content">
+                                            <p>{{lc.author.userName}} <span>sur</span>  <a href="{{ path('app_blog_article', {'id': lc.article.id})}}">{{lc.article.title}}</a></p>
+                                            <div class="tc-date">{{ lc.date|date('d/m/Y H:m') }}</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="tc-item">
-                                    <div class="tc-thumb set-bg" data-setbg="assets/img/authors/2.jpg"></div>
-                                    <div class="tc-content">
-                                        <p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
-                                        <div class="tc-date">June 21, 2018</div>
-                                    </div>
-                                </div>
-                                <div class="tc-item">
-                                    <div class="tc-thumb set-bg" data-setbg="assets/img/authors/3.jpg"></div>
-                                    <div class="tc-content">
-                                        <p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
-                                        <div class="tc-date">June 21, 2018</div>
-                                    </div>
-                                </div>
-                                <div class="tc-item">
-                                    <div class="tc-thumb set-bg" data-setbg="assets/img/authors/4.jpg"></div>
-                                    <div class="tc-content">
-                                        <p><a href="#">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
-                                        <div class="tc-date">June 21, 2018</div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -130,13 +104,7 @@
         	<!-- Footer section -->
 	<footer class="footer-section">
 		<div class="container">
-			<ul class="footer-menu">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="review.html">Games</a></li>
-				<li><a href="categories.html">Blog</a></li>
-				<li><a href="community.html">Forums</a></li>
-				<li><a href="contact.html">Contact</a></li>
-			</ul>
+
 			<p class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tous droits réservés | The Delta Force Team
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

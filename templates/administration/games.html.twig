@@ -49,13 +49,13 @@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-md-2 col-12 py-1">
-                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ game.name}}
+                                    <span class="d-inline-block d-md-none text-bold-700">Nom: </span>{{ game.name}}
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ game.description}}
+                                    <span class="d-inline-block d-md-none text-bold-700">Desc: </span>{{ game.description}}
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Tokens: </span><a href="{{ path('app_games_edit', {'id': game.id}) }}"class=" link btn-link btn  btn-outline-warning">Modifier</a></p>
+                                    <p class="mb-0"><a href="{{ path('app_games_edit', {'id': game.id}) }}"class=" link btn-link btn  btn-outline-warning">Modifier</a></p>
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
                                     <form method="post" action="{{ path('app_games_delete', {'id': game.id}) }}" onsubmit="return confirm('Êtes vous certain de vouloir supprimer le game "{{game.name}}"?');">

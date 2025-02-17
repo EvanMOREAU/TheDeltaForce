@@ -49,13 +49,13 @@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-md-2 col-12 py-1">
-                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ tag.name}}
+                                    <span class="d-inline-block d-md-none text-bold-700">Nom: </span>{{ tag.name}}
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Color: </span><div style="width: 20px; height: 20px; background-color: {{ tag.color }}; border: 1px solid #000; border-radius: 3px;"></div></p>
+                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Couleur: </span><div style="width: 20px; height: 20px; background-color: {{ tag.color }}; border: 1px solid #000; border-radius: 3px;"></div></p>
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Tokens: </span><a href="{{ path('app_tags_edit', {'id': tag.id}) }}"class=" link btn-link btn  btn-outline-warning">Modifier</a></p>
+                                    <p class="mb-0"><a href="{{ path('app_tags_edit', {'id': tag.id}) }}"class=" link btn-link btn  btn-outline-warning">Modifier</a></p>
                                 </div>
                                 {# <div class="col-md-2 col-12 py-1">
                                     <form method="post" action="{{ path('app_tags_delete', {'id': tag.id}) }}" onsubmit="return confirm('Êtes vous certain de vouloir supprimer le tag "{{tag.name}}"?');">

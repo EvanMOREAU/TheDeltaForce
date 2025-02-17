@@ -11,6 +11,7 @@ use App\Entity\Grades;
 use App\Form\NewsType;
 use App\Form\TagsType;
 use App\Form\UserType;
+use App\Entity\Comment;
 use App\Form\EventType;
 use App\Form\GamesType;
 use App\Entity\Articles;
@@ -26,6 +27,7 @@ use App\Form\GradesAffectationType;
 use App\Repository\EventRepository;
 use App\Repository\GamesRepository;
 use App\Repository\GradesRepository;
+use App\Repository\CommentRepository;
 use App\Services\ImageUploaderHelper;
 use App\Repository\ArticlesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -333,6 +335,39 @@ final class AdministrationController extends AbstractController
             'form' => $form,
         ]);
     }
+    #[Route('/grades/{id}/edit', name: 'app_grades_edit', methods: ['GET', 'POST'])]
+    public function editgrades(Request $request, Grades $grade, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        $form = $this->createForm(GradesType::class, $grade);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_grades_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('administration/edit.html.twig', [
+            'entityInfo' => 'd\'un grade',
+            'grade' => $grade,
+            'form' => $form,
+        ]);
+    }
+    #[Route('/grades/{id}/delete', name: 'app_grades_delete', methods: ['POST'])]
+    public function deleteGrades(Request $request, Grades $grade, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        if ($this->isCsrfTokenValid('delete'.$grade->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($grade);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_grades_index', [], Response::HTTP_SEE_OTHER);
+    }
+
     #[Route('/grades', name: 'app_grades_index', methods: ['GET', 'POST'])]
     public function indexGrades(Request $request, GradesRepository $gradesRepository, EntityManagerInterface $entityManager): Response
     {
@@ -506,6 +541,28 @@ final class AdministrationController extends AbstractController
             'event' => $event,
             'form' => $form,
         ]);
+    }
+    #[Route('/commentaires', name: 'app_comment_index', methods: ['GET', 'POST'])]
+    public function indexComment(Request $request, CommentRepository $commentRepository): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        
+        return $this->render('administration/comment.html.twig', [
+            'Comments' => $commentRepository->findAll(),
+        ]);
+    }
+    #[Route('/commentaire/{id}/delete', name: 'app_comment_delete', methods: ['POST'])]
+    public function deleteComment(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($comment);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
     }
     // #[Route('/events/{id}/delete', name: 'app_events_delete', methods: ['POST'])]
     // public function deleteEvent(Request $request, Event $event, EntityManagerInterface $entityManager): Response

@@ -58,19 +58,19 @@
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-md-2 col-12 py-1">
-                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ event.title}}
+                                    <span class="d-inline-block d-md-none text-bold-700">Titre: </span>{{ event.title}}
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ event.dateDebut|date("d/m/Y")}}
+                                    <span class="d-inline-block d-md-none text-bold-700">Début: </span>{{ event.dateDebut|date("d/m/Y")}}
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ event.dateFin|date("d/m/Y")}}
+                                    <span class="d-inline-block d-md-none text-bold-700">Fin: </span>{{ event.dateFin|date("d/m/Y")}}
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>{{ event.author.userName }}
+                                    <span class="d-inline-block d-md-none text-bold-700">Auteur: </span>{{ event.author.userName }}
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <span class="d-inline-block d-md-none text-bold-700">Name: </span>
+                                    <span class="d-inline-block d-md-none text-bold-700">En jeu ? : </span>
                                     {% if event.inGame %} 
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
@@ -82,7 +82,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="col-md-2 col-12 py-1">
-                                    <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Tokens: </span><a href="{{ path('app_events_edit', {'id': event.id}) }}"class=" link btn-link btn  btn-outline-warning">Modifier</a></p>
+                                    <p class="mb-0"><a href="{{ path('app_events_edit', {'id': event.id}) }}"class=" link btn-link btn  btn-outline-warning">Modifier</a></p>
                                 </div>
                                 {# <div class="col-md-2 col-12 py-1">
                                     <form method="post" action="{{ path('app_events_delete', {'id': event.id}) }}" onsubmit="return confirm('Êtes vous certain de vouloir supprimer l'events "{{event.title}}"?');">

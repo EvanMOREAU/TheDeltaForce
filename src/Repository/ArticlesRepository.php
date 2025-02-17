@@ -16,6 +16,15 @@ class ArticlesRepository extends ServiceEntityRepository
         parent::__construct($registry, Articles::class);
     }
 
+    public function findLatestArticlesById(int $limit = 3): array
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC') // Trie du plus grand ID au plus petit
+            ->setMaxResults($limit) // Limite à 10 articles
+            ->getQuery()
+            ->getResult();
+    }
+    
     //    /**
     //     * @return Articles[] Returns an array of Articles objects
     //     */
