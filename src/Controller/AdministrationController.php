@@ -204,7 +204,7 @@ final class AdministrationController extends AbstractController
                     // Appeler la méthode uploadImage pour obtenir le nom du fichier final
                     $newFilename = $this->imageUploaderHelper->uploadImage($imageFile2, $game->getName());
                     if ($newFilename) {
-                        $game->setImg($newFilename); // Enregistrer seulement le nom du fichier dans l'entité
+                        $game->setImg2($newFilename); // Enregistrer seulement le nom du fichier dans l'entité
                     }
                 } catch (\Exception $e) {
                     $this->addFlash('danger', $e->getMessage());
