@@ -289,6 +289,19 @@ final class AdministrationController extends AbstractController
         $formNew->handleRequest($request);
 
         if ($formNew->isSubmitted() && $formNew->isValid()) {
+            $imageFile = $formNew->get('img')->getData();
+            if ($imageFile) {
+                dump($imageFile); // Vérifiez si le fichier est bien reçu
+                try {
+                    // Appeler la méthode uploadImage pour obtenir le nom du fichier final
+                    $newFilename = $this->imageUploaderHelper->uploadImage($imageFile, $article->getTitle());
+                    if ($newFilename) {
+                        $article->setImg($newFilename); // Enregistrer seulement le nom du fichier dans l'entité
+                    }
+                } catch (\Exception $e) {
+                    $this->addFlash('danger', $e->getMessage());
+                }
+            }
             $entityManager->persist($article);
             $entityManager->flush();
 
